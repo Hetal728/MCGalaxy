@@ -91,6 +91,8 @@ namespace MCGalaxy.Commands.World {
             p.Message("&TPhysics settings:");
             p.Message("  Finite mode: {0}&S, Random flow: {1}",
                            GetBool(cfg.FiniteLiquids), GetBool(cfg.RandomFlow));
+            p.Message("  Finite high water {0}&S",
+                           GetBool(cfg.FiniteHighWater));
             p.Message("  Animal hunt AI: {0}&S, Edge water: {1}",
                            GetBool(cfg.AnimalHuntAI), GetBool(cfg.EdgeWater));
             p.Message("  Grass growing: {0}&S, {1} tree growing: {2}",

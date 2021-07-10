@@ -116,6 +116,8 @@ namespace MCGalaxy.Blocks.Physics {
                 case Block.Air_FloodDown:
                 case Block.StillLava:
                 case Block.StillWater:
+                case Block.Lava:
+                case Block.Water:
                 case Block.WaterDown:
                     break;
                     
@@ -144,6 +146,8 @@ namespace MCGalaxy.Blocks.Physics {
                 case Block.Air_FloodDown:
                 case Block.StillLava:
                 case Block.StillWater:
+                case Block.Lava:
+                case Block.Water:
                 case Block.LavaDown:
                     break;
                 default:

@@ -32,9 +32,11 @@ namespace MCGalaxy.Blocks.Physics {
             if (below == Block.Air) {
                 lvl.AddUpdate(index, C.Block, C.Data);
                 lvl.AddUpdate(C.Index, Block.Air, default(PhysicsArgs));
+                CheckAround(lvl, x, y, z, index);
                 C.Data.ResetTypes();
             } else if (below == Block.StillWater || below == Block.StillLava) {
                 lvl.AddUpdate(C.Index, Block.Air, default(PhysicsArgs));
+                CheckAround(lvl, x, y, z, index);
                 C.Data.ResetTypes();
             } else {
                 const int count = 25;
@@ -69,14 +71,34 @@ namespace MCGalaxy.Blocks.Physics {
 
                         if (lvl.IsAirAt(posX, y, posZ, out index) && lvl.AddUpdate(index, C.Block, C.Data)) {
                             lvl.AddUpdate(C.Index, Block.Air, default(PhysicsArgs));
+                            CheckAround(lvl, x, y, z, index);
                             C.Data.ResetTypes();
                             return;
                         }
                     }
                 }
+
+                // Not moving - don't retry.
+                C.Data.Data = PhysicsArgs.RemoveFromChecks;
             }
         }
-        
+
+        static void CheckAround(Level lvl, ushort x, ushort y, ushort z, int newind) {
+            int index, dx, dy, dz;
+            for (dx = -2; dx<3; dx++)
+                for (dy = -2; dy<3; dy++)
+                    for (dz = -2; dz<3; dz++)
+                    {
+                        if (dx==0 && dy==0 && dz==0) continue;
+
+                        BlockID block = lvl.GetBlock((ushort)(x+dx), (ushort)(y+dy), (ushort)(z+dz), out index);
+                        if (index == newind) continue;
+
+                        if (block == Block.FiniteWater || block == Block.FiniteLava)
+                            lvl.AddCheck(index);
+                    }
+        }
+
         static bool Expand(Level lvl, ushort x, ushort y, ushort z) {
             int index;
             return lvl.IsAirAt(x, y, z, out index) && lvl.AddUpdate(index, Block.FiniteWater, default(PhysicsArgs));

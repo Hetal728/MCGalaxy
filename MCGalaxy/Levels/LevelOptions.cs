@@ -39,6 +39,7 @@ namespace MCGalaxy {
         public const string Goto = "LoadOnGoto", Decay = "LeafDecay", Flow = "RandomFlow", Trees = "GrowTrees";
         public const string Chat = "Chat", Guns = "Guns", Buildable = "Buildable", Deletable = "Deletable";
         public const string LoadDelay = "LoadDelay", Drawing = "Drawing", Authors = "Authors";
+        public const string FiniteHighWater = "FiniteHighWater";
         
         public static List<LevelOption> Options = new List<LevelOption>() {
              new LevelOption(MOTD,       SetMotd,  "&HSets the motd for this map. (leave blank to use default motd)"),
@@ -51,6 +52,7 @@ namespace MCGalaxy {
              new LevelOption(Fall,   SetFall,   "&HSets how many blocks you can fall before dying."),
              new LevelOption(Drown,  SetDrown,  "&HSets how long you can stay underwater (in tenths of a second) before drowning."),
              new LevelOption(Finite, SetFinite, "&HWhether all liquids are finite."),
+             new LevelOption(FiniteHighWater, SetFiniteHighWater, "&HWhether Only active water above edge level is finite."),
              new LevelOption(AI,     SetAI,     "&HAI will make animals hunt or flee."),
              new LevelOption(Edge,   SetEdge,   "&HWhether water flows from the map edges."),
              new LevelOption(Grass,  SetGrass,  "&HWhether grass auto grows or not."),
@@ -126,6 +128,7 @@ namespace MCGalaxy {
         }
         
         static void SetFinite(Player p, Level l, string v) { Toggle(p, l, ref l.Config.FiniteLiquids, "Finite mode"); }
+        static void SetFiniteHighWater(Player p, Level l, string v) { Toggle(p, l, ref l.Config.FiniteHighWater, "FiniteHighWater"); }
         static void SetAI(Player p,     Level l, string v) { Toggle(p, l, ref l.Config.AnimalHuntAI, "Animal AI"); }
         static void SetEdge(Player p,   Level l, string v) { Toggle(p, l, ref l.Config.EdgeWater, "Edge water"); }
         static void SetGrass(Player p,  Level l, string v) { Toggle(p, l, ref l.Config.GrassGrow, "Growing grass"); }

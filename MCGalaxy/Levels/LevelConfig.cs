@@ -233,6 +233,8 @@ namespace MCGalaxy {
         public bool LeafDecay;
         [ConfigBool("Finite mode", "Physics", false)]
         public bool FiniteLiquids;
+        [ConfigBool("FiniteHighWater", "Physics", false)]
+        public bool FiniteHighWater;
         [ConfigBool("GrowTrees", "Physics", false)]
         public bool GrowTrees;
         [ConfigBool("Animal AI", "Physics", true)]
