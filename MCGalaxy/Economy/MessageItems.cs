@@ -35,6 +35,11 @@ namespace MCGalaxy.Eco {
                 return;
             }
             
+            if (p.muted) {
+                p.Message("%WYou cannot purchase this while you are muted.");
+                return;
+            }
+
         	if (!CheckPrice(p)) return;
             if (msg == PlayerDB.GetLoginMessage(p)) {
                 p.Message("&WYou already have that login message."); return;
@@ -62,6 +67,11 @@ namespace MCGalaxy.Eco {
                 p.Message("&aYour logout message was removed for free.");
                 return;
         	}
+            
+            if (p.muted) {
+                p.Message("%WYou cannot purchase this while you are muted.");
+                return;
+            }
             
         	if (!CheckPrice(p)) return;    
             if (msg == PlayerDB.GetLogoutMessage(p)) {

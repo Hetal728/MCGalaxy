@@ -29,8 +29,13 @@ namespace MCGalaxy.Eco {
         
         protected internal override void OnPurchase(Player p, string title) {
             if (title.Length == 0) {
-                UseCommand(p, "Title", "-own");
+                UseCommand(Player.Console, "Title", p.name);
                 p.Message("&aYour title was removed for free."); return;
+            }
+
+            if (p.muted) {
+                p.Message("%WYou cannot purchase this while you are muted.");
+                return;
             }
             
         	if (!CheckPrice(p)) return;
@@ -56,8 +61,13 @@ namespace MCGalaxy.Eco {
         
         protected internal override void OnPurchase(Player p, string nick) {
             if (nick.Length == 0) {
-                UseCommand(p, "Nick", "-own");
+                UseCommand(Player.Console, "Nick", p.name);
                 p.Message("&aYour nickname was removed for free."); return;
+            }
+            
+            if (p.muted) {
+                p.Message("%WYou cannot purchase this while you are muted.");
+                return;
             }
             
         	if (!CheckPrice(p)) return;
